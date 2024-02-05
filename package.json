@@ -1,0 +1,69 @@
+{
+  "name": "react-table-filter",
+  "version": "2.0.2",
+  "description": "",
+  "main": "lib/bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack --watch",
+    "start:dev": "./node_modules/.bin/webpack-dev-server --content-base ./docs --inline --hot",
+    "build-example": "cd examples; ../node_modules/.bin/webpack",
+    "run-example": "cd examples; ../node_modules/.bin/webpack-dev-server --content-base ../docs --inline --hot --config webpack.config.js",
+    "release": "npm run build; npm publish",
+    "pretest": "./node_modules/.bin/eslint ./src",
+    "bundleanalyze": "analyze=true ./node_modules/.bin/webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cheekujha/react-table-filter.git"
+  },
+  "author": "cheekujha@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "*",
+    "@babel/plugin-proposal-class-properties": "*",
+    "@babel/preset-env": "*",
+    "@babel/preset-react": "*",
+    "babel-eslint": "*",
+    "babel-loader": "*",
+    "babel-plugin-transform-object-assign": "*",
+    "chai": "*",
+    "css-loader": "*",
+    "enzyme": "*",
+    "enzyme-adapter-react-16": "*",
+    "eslint": "*",
+    "eslint-config-google": "*",
+    "eslint-plugin-babel": "*",
+    "eslint-plugin-react": "*",
+    "extract-text-webpack-plugin": "~4.0*",
+    "html-webpack-plugin": "*",
+    "ignore-styles": "*",
+    "jsdom": "*",
+    "mocha": "*",
+    "node-sass": "*",
+    "sass-loader": "*",
+    "style-loader": "*",
+    "terser-webpack-plugin": "*",
+    "webpack": "*",
+    "webpack-bundle-analyzer": "*",
+    "webpack-cli": "*",
+    "webpack-dev-server": "*"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-table",
+    "react-table-filter",
+    "tablefilter",
+    "react-component",
+    "react-filter-table"
+  ]
+}
