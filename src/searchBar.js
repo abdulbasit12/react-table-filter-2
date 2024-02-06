@@ -12,6 +12,9 @@ class SearchBar extends React.Component {
    */
   constructor(props) {
     super(props);
+    this.state = {
+      search: ""
+    }
   }
 
   /**
@@ -29,6 +32,7 @@ class SearchBar extends React.Component {
    * @param  {String} val
    */
   _callSearchChanged = (val) => {
+    this.setState({ search: val })
     this.props.searchChanged && this.props.searchChanged(val);
   }
 
@@ -39,7 +43,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="search-parent filter-list-item">
-        <input className="search-input" type="text" placeholder="search" onChange={this._searchInputChanged}/>
+        <input className="search-input" type="text" placeholder="Search" value={this.state.search} onChange={this._searchInputChanged}/>
       </div>
     );
   }

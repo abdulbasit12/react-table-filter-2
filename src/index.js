@@ -111,7 +111,6 @@ class TableFilter extends Component {
    */
   _filterMulipleRows = (addFilterArray=[], removeFilterArray=[], valueFunc=undefined) => {
     const filteredData = this.state.filteredData;
-
     if (!isUndefined(addFilterArray)) {
       removeFilterArray.map((filterItem) => {
         this._updateCurrentFilter(filterItem.value, false, filterItem.key);
@@ -132,7 +131,7 @@ class TableFilter extends Component {
         this.setState({
           filteredData: dataWithFilter,
         });
-        this.props.onFilterUpdate && this.props.onFilterUpdate(filteredArray, this._getCurrentFilters());
+        this.props.onFilterUpdate && this.props.onFilterUpdate(this.state.initialData, this._getCurrentFilters());
       }
     }
   }
@@ -153,7 +152,6 @@ class TableFilter extends Component {
       if (!isUndefined(result)) {
         const filteredArray = result.filteredArray;
         const dataWithFilter = result.dataWithFilter;
-
         this.setState({
           filteredData: dataWithFilter,
         });

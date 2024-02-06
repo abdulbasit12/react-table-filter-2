@@ -14,22 +14,22 @@ import {
   ASC_VALUE,
 } from './constants';
 
-export const filterActions = (inputArray=[], filterArray=[], addFilter=true, valueFunc=undefined) => {
+export const filterActions = (inputArray = [], filterArray = [], addFilter = true, valueFunc = undefined) => {
   const filteredArray = [];
+  let itemVal = '';
   const dataWithFilter = inputArray.map((item) => {
     const itemCopy = Object.assign({}, item);
-
+    itemVal = item.name
     let i; let l;
 
     if (isUndefined(itemCopy.appliedFilters)) {
       itemCopy.appliedFilters = {};
     }
 
-    for (i=0, l=filterArray.length; i<l; i=i+1) {
+    for (i = 0, l = filterArray.length; i < l; i = i + 1) {
       const filterItem = filterArray[i];
       const key = filterItem.key;
       let value = filterItem.value;
-
       if (isUndefined(value)) {
         value = '';
       }
@@ -63,10 +63,16 @@ export const filterActions = (inputArray=[], filterArray=[], addFilter=true, val
         }
       }
     }
-
     if (Object.keys(itemCopy.appliedFilters).length === 0) {
       delete itemCopy['appliedFilters'];
-      filteredArray.push(Object.assign({}, itemCopy));
+      // filteredArray.push(Object.assign({}, itemCopy));
+    }
+    if (addFilter) {
+      if (itemValue === value) {
+        filteredArray.push(itemCopy)
+      }
+    } else {
+        filteredArray.push(itemCopy)
     }
 
     return itemCopy;
@@ -88,7 +94,7 @@ export const filterActions = (inputArray=[], filterArray=[], addFilter=true, val
  *         filteredArray [Filtered items after appying filter]
  *         dataWithFilter [inputArray along with modification due to applied filters]
  */
-export const filterAction = (inputArray=[], filter={}, addFilter=true, valueFunc=undefined) => {
+export const filterAction = (inputArray = [], filter = {}, addFilter = true, valueFunc = undefined) => {
   const key = filter.key;
   let value = filter.value;
 
@@ -135,7 +141,15 @@ export const filterAction = (inputArray=[], filter={}, addFilter=true, valueFunc
 
       if (Object.keys(itemCopy.appliedFilters).length === 0) {
         delete itemCopy['appliedFilters'];
-        filteredArray.push(Object.assign({}, itemCopy));
+        // filteredArray.push(Object.assign({}, itemCopy));
+      }
+
+      if (addFilter) {
+        if (itemValue != value) {
+          filteredArray.push(itemCopy)
+        }
+      } else {
+        filteredArray.push(itemCopy)
       }
 
       return itemCopy;
@@ -159,7 +173,7 @@ export const filterAction = (inputArray=[], filter={}, addFilter=true, valueFunc
  * @param  {Function}  valueFunc  [Function to calculate value of the property(optional)]
  * @return {[type]}
  */
-export const filtersReset = (inputArray=[], values=[], key=undefined, selectAll=true, valueFunc=undefined) => {
+export const filtersReset = (inputArray = [], values = [], key = undefined, selectAll = true, valueFunc = undefined) => {
   const filteredArray = [];
   const dataWithFilter = inputArray.map((item) => {
     const itemCopy = Object.assign({}, item);
@@ -281,14 +295,14 @@ export const createFiltersFromItems = (dataArray, filterkey, itemDisplayValueFun
       let filterItem = filterList[filterIndex];
       if (Object.keys(appliedFilters).length === 0) {
         if (!filterItem.selected || !filterItem.visible) {
-          filterItem = Object.assign({}, filterItem, {'selected': true, 'visible': true});
+          filterItem = Object.assign({}, filterItem, { 'selected': true, 'visible': true });
           filterList[filterIndex] = filterItem;
         }
       }
 
       if (Object.keys(appliedFilters).length === 1 && Object.keys(appliedFilters)[0] === filterkey) {
         selectState = false;
-        filterItem = Object.assign({}, filterItem, {'selected': false, 'visible': true});
+        filterItem = Object.assign({}, filterItem, { 'selected': false, 'visible': true });
         filterList[filterIndex] = filterItem;
       }
     }
@@ -323,8 +337,8 @@ export const calculateFilterProps = ({
   sortKey,
   sortType,
 }) => {
-  const {filterList, selectState} = createFiltersFromItems(filteredData, filterkey, itemDisplayValueFunc, itemSortValueFunc);
-  const sortTypeState = (!isUndefined(sortKey) && (sortKey === filterkey) ) ? sortType : undefined;
+  const { filterList, selectState } = createFiltersFromItems(filteredData, filterkey, itemDisplayValueFunc, itemSortValueFunc);
+  const sortTypeState = (!isUndefined(sortKey) && (sortKey === filterkey)) ? sortType : undefined;
 
   return {
     filterList: filterList,
